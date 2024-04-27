@@ -1,0 +1,7 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    background: #0a0909;
+    color: white;
+
+}
