@@ -6,11 +6,14 @@ import {Loader} from "../loader/Loader";
 import {RootObject} from "../../utils/dataTypes";
 import {Pagination} from "@mui/material";
 import {SmallCard} from "../smallcard/SmallCard";
+import Card from "../card/Card";
+
 
 const Body = (): JSX.Element => {
-
+    const [open, setOpen] = useState(true)
+    const [ind, setInd] = useState(1)
     const [currentPage, setCurrentPage] = useState(1)
-    const [postPerPage, setPostPerPage] = useState(5)
+    const [postPerPage, setPostPerPage] = useState(2)
 
     const {isPending, error, data} = useQuery<RootObject>({
         queryKey: ['repoData'],
@@ -34,21 +37,34 @@ const Body = (): JSX.Element => {
         setCurrentPage(page)
     }
 
-    const pageCounts=data.docs.length/postPerPage
-
+    const pageCounts = data.docs.length / postPerPage
+    const handler = (i:number) => {
+        setInd(i+currentPage*postPerPage-2)
+        setOpen(!open)
+    }
+    const cardHandler = () => {
+        setOpen(!open)
+    }
 
     return (
         <div className={S.body}>
+
             <div className={S.container}>
-                <h1 className={S.h1}>Лучшие фильмы</h1>
-                <Pagination color={'primary'} count={pageCounts} page={currentPage} onChange={(e, page) => PageChanger(e, page)}/>
-                <div className={S.cards}>
-                    {currentPosts.map((t, i) => {
-                        return (
-                            <SmallCard key={i} data={t}/>
-                        )
-                    })}
-                </div>
+                {open ? <>
+                        <h1 className={S.h1}>Лучшие фильмы</h1>
+                        <Pagination color={'primary'} count={pageCounts} page={currentPage}
+                                    onChange={(e, page) => PageChanger(e, page)}/>
+
+                        <div className={S.cards}>
+                            {currentPosts.map((t, i) => {
+                                return (
+                                    <SmallCard key={i} keyInd={i} data={t} onChangeHandler={handler}/>
+                                )
+                            })}
+                        </div>
+                    </>
+                    : <Card data={data.docs[ind]} handler={cardHandler}/>
+                }
             </div>
 
         </div>

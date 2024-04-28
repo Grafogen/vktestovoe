@@ -3,13 +3,15 @@ import s from './card.module.css'
 import { RootObjectDocs} from "../../utils/dataTypes";
 
 type PropsType = {
-    data: RootObjectDocs
+    data: RootObjectDocs,
+    handler:()=>void
 }
 
 const Card = (props: PropsType) => {
-    const {data} = props
+    const {data,handler} = props
     return (
         <div>
+            <button onClick={handler}> Назад</button>
             <section className={s.section}>
                 <div className={s.text}>
                     <h1>
