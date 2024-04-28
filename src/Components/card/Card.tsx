@@ -23,7 +23,7 @@ const Card = (props: PropsType) => {
                     <p>Рейтинг: {data.rating.imdb} </p>
                     <p>Страна: {data.countries.map(t => `${t.name} `)} </p>
                 </div>
-                <div>
+                <div className={s.image}>
                     <img src={data.poster.url}/>
                 </div>
             </section>
