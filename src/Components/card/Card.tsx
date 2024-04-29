@@ -11,7 +11,7 @@ const Card = (props: PropsType) => {
     const {data,handler} = props
     return (
         <div>
-            <button onClick={handler}> Назад</button>
+            <button onClick={handler} className={s.button}> Назад</button>
             <section className={s.section}>
                 <div className={s.text}>
                     <h1>

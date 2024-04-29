@@ -20,3 +20,14 @@
     height: 100%;
     object-fit: cover;
 }
+
+.button{
+    margin: 10px;
+    background-color: #eabdbd;
+    border-radius: 10px;
+    width: 80px;
+
+    &:hover{
+        background-color: #de8787;
+    }
+}

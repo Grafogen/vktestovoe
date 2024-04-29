@@ -15,6 +15,7 @@ const Body = (): JSX.Element => {
     const [currentPage, setCurrentPage] = useState(1)
     const [postPerPage, setPostPerPage] = useState(2)
 
+
     const {isPending, error, data} = useQuery<RootObject>({
         queryKey: ['repoData'],
         queryFn: async () => {
@@ -36,7 +37,6 @@ const Body = (): JSX.Element => {
     const PageChanger = (event: any, page: number) => {
         setCurrentPage(page)
     }
-
     const pageCounts = data.docs.length / postPerPage
     const handler = (i:number) => {
         setInd(i+currentPage*postPerPage-2)
